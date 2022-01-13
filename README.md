@@ -1,4 +1,4 @@
-# re-frame-resume
+# resume
 
 A [re-frame](https://github.com/day8/re-frame) application designed to ... well, that part is up to
 you.
@@ -76,7 +76,7 @@ Use your preferred editor or IDE that supports Clojure/ClojureScript development
         ```bash
         export CHROME_BIN=chromium-browser
        ```
-5. Clone this repo and open a terminal in the `re-frame-resume` project root directory
+5. Clone this repo and open a terminal in the `resume` project root directory
 
 ### Browser Setup
 
@@ -213,8 +213,8 @@ The `debug?` variable in [`config.cljs`](src/cljs/re_frame_resume/config.cljs) d
 Use `debug?` for logging or other tasks that should run only on `dev` builds:
 
 ```clj
-(ns re-frame-resume.example
-  (:require [re-frame-resume.config :as config])
+(ns resume.example
+  (:require [resume.config :as config])
 
 (when config/debug?
   (println "This message will appear in the browser console only on dev builds."))

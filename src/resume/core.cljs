@@ -1,11 +1,10 @@
-(ns re-frame-resume.core
+(ns resume.core
   (:require
    [reagent.dom :as rdom]
    [re-frame.core :as re-frame]
-   [re-frame-resume.events :as events]
-   [re-frame-resume.views :as views]
-   [re-frame-resume.config :as config]
-   ))
+   [resume.events :as events]
+   [resume.views :as views]
+   [resume.config :as config]))
 
 (defn dev-setup []
   (when config/debug?

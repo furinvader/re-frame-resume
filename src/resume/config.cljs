@@ -1,4 +1,4 @@
-(ns re-frame-resume.config)
+(ns resume.config)
 
 (def debug?
   ^boolean goog.DEBUG)

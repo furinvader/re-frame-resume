@@ -1,4 +1,4 @@
-(ns re-frame-resume.db)
+(ns resume.db)
 
 (def default-db
   {:name "re-frame"})
