@@ -1,6 +1,7 @@
 (ns resume.core
   (:require
    [reagent.dom :as rdom]
+   [day8.re-frame.http-fx]
    [re-frame.core :as re-frame]
    [resume.events :as events]
    [resume.views :as views]

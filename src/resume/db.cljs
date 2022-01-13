@@ -1,4 +1,5 @@
 (ns resume.db)
 
 (def default-db
-  {:name "re-frame"})
+  {:name "re-frame"
+   :hello-world ""})
