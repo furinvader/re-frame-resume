@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "shadow-cljs watch frontend"
+    "watch:frontend": "shadow-cljs watch frontend"
   },
   "devDependencies": {
     "shadow-cljs": "2.16.12"
