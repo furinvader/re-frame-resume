@@ -4,6 +4,10 @@
 /*-init.clj
 /*.log
 
+/.calva
+/.clj-kondo
+/.lsp
+
 # Leiningen
 /.lein-*
 /.nrepl-port
