@@ -15,7 +15,7 @@
  (fn [{:keys [db]}]
    {:db (assoc db :hello-world "...loading...")
     :http-xhrio {:method :get
-                 :uri "https://resume.alexdik.de/api/hello-world"
+                 :uri "api/hello-world"
                  :response-format (ajax/json-response-format {:keywords? true})
                  :on-success [::hello-world-success]}}))
 
