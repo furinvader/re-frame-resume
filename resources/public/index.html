@@ -4,15 +4,97 @@
 <head>
   <meta charset='utf-8'>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>resume</title>
+  <title>Title</title>
 </head>
 
 <body>
   <noscript>
-    resume is a JavaScript app. Please enable JavaScript to continue.
+    This is a JavaScript app. Please enable JavaScript to continue.
+    <style>
+      #preloader {
+        display: none;
+      }
+    </style>
   </noscript>
   <div id="app"></div>
-  <script src="/js/compiled/app.js"></script>
+  <div id="preloader">
+    <div></div>
+    <style>
+      #preloader {
+        --container-width: 100vw;
+        --container-height: 100vh;
+        position: fixed;
+        width: var(--container-width);
+        height: var(--container-height);
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background: white;
+      }
+
+      @media (orientation: landscape) {
+        #preloader>div {
+          --figure-size: 10vh;
+        }
+      }
+
+      @media (orientation: portrait) {
+        #preloader>div {
+          --figure-size: 10vw;
+        }
+      }
+
+      #preloader>div {
+        height: var(--figure-size);
+        width: var(--figure-size);
+        border-radius: 100%;
+        background: #e74c3c;
+        margin: 0 auto;
+        margin-top: calc(var(--container-height) / 2 - var(--figure-size) / 2);
+        position: absolute;
+        left: calc(var(--container-width) / 2 - var(--figure-size) / 2);
+        animation: spin 2.3s ease infinite;
+      }
+
+      #preloader>div::before,
+      #preloader>div::after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: inherit;
+        width: inherit;
+        background: inherit;
+        border-radius: inherit;
+        animation: inherit;
+      }
+
+      #preloader>div::before {
+        left: calc(-1.15 * var(--figure-size));
+      }
+
+      #preloader>div::after {
+        left: calc(1.15 * var(--figure-size));
+      }
+
+      @keyframes spin {
+        0% {
+          top: 0;
+          transform: rotate(0deg);
+        }
+
+        50% {
+          top: calc(-2 * var(--figure-size));
+          transform: rotate(-180deg);
+        }
+
+        100% {
+          top: 0;
+          transform: rotate(-360deg);
+        }
+      }
+    </style>
+  </div>
+  <script src="/js/compiled/app.js" onload="document.getElementById('preloader').style.display = 'none'"></script>
 </body>
 
 </html>
