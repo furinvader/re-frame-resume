@@ -1,5 +1,8 @@
 # resume
 
+# Conventonal Commits
+See [https://www.conventionalcommits.org/en/v1.0.0-beta.2/](https://www.conventionalcommits.org/en/v1.0.0-beta.2/)
+
 A [re-frame](https://github.com/day8/re-frame) application designed to ... well, that part is up to
 you.
 
