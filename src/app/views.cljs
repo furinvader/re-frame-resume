@@ -1,4 +1,4 @@
-(ns resume.views
+(ns app.views
   (:require
    [re-frame.core :as rf]
    [resume.styles :as styles]

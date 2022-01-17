@@ -1,4 +1,4 @@
-(ns resume.subs
+(ns app.subs
   (:require
    [re-frame.core :as rf]))
 

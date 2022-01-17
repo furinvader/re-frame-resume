@@ -1,4 +1,4 @@
-(ns resume.styles
+(ns app.styles
   (:require-macros
    [garden.def :refer [defcssfn]])
   (:require

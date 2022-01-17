@@ -1,11 +1,11 @@
-(ns resume.core
+(ns app.core
   (:require
    [reagent.dom :as rdom]
    [day8.re-frame.http-fx]
    [re-frame.core :as rf]
-   [resume.events :as events]
-   [resume.views :as views]
-   [resume.config :as config]))
+   [app.events :as events]
+   [app.views :as views]
+   [app.config :as config]))
 
 (defn dev-setup []
   (when config/debug?

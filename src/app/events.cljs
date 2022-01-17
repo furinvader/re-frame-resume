@@ -1,8 +1,8 @@
-(ns resume.events
+(ns app.events
   (:require
    [re-frame.core :as rf]
    [ajax.core :as ajax]
-   [resume.db :as db]
+   [app.db :as db]
    [day8.re-frame.tracing :refer-macros [fn-traced]]))
 
 (rf/reg-event-db
