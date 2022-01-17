@@ -1,6 +1,6 @@
-(ns resume.core-test
+(ns app.core-test
   (:require [cljs.test :refer-macros [deftest testing is]]
-            [resume.core :as core]))
+            [app.core :as core]))
 
 (deftest fake-test
   (testing "fake description"

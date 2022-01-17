@@ -1,9 +1,9 @@
 (ns app.views
   (:require
    [re-frame.core :as rf]
-   [resume.styles :as styles]
-   [resume.subs :as subs]
-   [resume.events :as events]))
+   [app.styles :as styles]
+   [app.subs :as subs]
+   [app.events :as events]))
 
 (defn hello-world []
   (let [text (rf/subscribe [::subs/hello-world])]
