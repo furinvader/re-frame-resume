@@ -1,5 +1,5 @@
-(ns app.db)
+(ns app.db
+  (:require [content.db]))
 
 (def default-db
-  {:name "re-frame"
-   :hello-world ""})
+  content.db/default-db)
