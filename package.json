@@ -8,9 +8,13 @@
 		"ci": "npx shadow-cljs compile karma-test && npx karma start --single-run --reporters junit,dots"
 	},
 	"dependencies": {
+		"@emotion/react": "11.7.1",
+		"@emotion/styled": "11.6.0",
+		"@mui/material": "5.2.8",
 		"highlight.js": "11.1.0",
 		"react": "17.0.2",
-		"react-dom": "17.0.2"
+		"react-dom": "17.0.2",
+		"react-markdown": "8.0.0"
 	},
 	"devDependencies": {
 		"karma": "6.3.9",

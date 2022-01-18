@@ -1,9 +1,14 @@
 (ns content.views
-  (:require [content.subs :as subs]
-            [re-frame.core :as rf]))
+  (:require ["@mui/material/Box" :default Box]
+            [content.subs :as subs]
+            [re-frame.core :as rf]
+            ["react-markdown" :default ReactMarkdown]))
+
+(defn markdown [md]
+  [:> ReactMarkdown md])
 
 (defn content-renderer []
   (let [elements @(rf/subscribe [::subs/elements])]
-    [:div "content: "
-     (for [{:keys [id markdown]} elements]
-       ^{:key id} [:pre markdown])]))
+    [:> Box "content: "
+     (for [{id :id md :markdown} elements]
+       ^{:key id} [markdown md])]))
