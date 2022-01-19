@@ -20,5 +20,5 @@
 (defn content-renderer []
   (let [elements @(rf/subscribe [::subs/elements])]
     [layout
-     (for [{id :id md :markdown} elements]
-       ^{:key id} [markdown md])]))
+     (for [{:keys [id text]} elements]
+       ^{:key id} [markdown text])]))
