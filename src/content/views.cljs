@@ -1,9 +1,9 @@
 (ns content.views
   (:require ["@mui/material/Container" :default Container]
             ["@mui/material/Grid" :default Grid]
+            [content.markdown :as md]
             [content.subs :as subs]
-            [re-frame.core :as rf]
-            ["react-markdown" :default ReactMarkdown]))
+            [re-frame.core :as rf]))
 
 (defn layout [children]
   [:> Container {:maxWidth "md"}
@@ -14,11 +14,8 @@
     [:> Grid {:item true :xs 1} "overview"]
     [:> Grid {:item true :xs 11} "content" children]]])
 
-(defn markdown [md]
-  [:> ReactMarkdown md])
-
 (defn content-renderer []
   (let [elements @(rf/subscribe [::subs/elements])]
     [layout
      (for [{:keys [id text]} elements]
-       ^{:key id} [markdown text])]))
+       ^{:key id} [md/markdown text])]))
