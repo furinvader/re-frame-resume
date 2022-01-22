@@ -4,5 +4,9 @@
 
 (rf/reg-sub
  ::elements
- (fn [db]
-   (vals (::db/elements db))))
+ (fn [db [_ position]]
+   (let [values (vals (::db/elements db))
+         items (sort-by :sorting values)]
+     (if position
+       (filter #(= (:position %) position) items)
+       items))))
