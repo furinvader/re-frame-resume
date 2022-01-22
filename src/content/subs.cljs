@@ -10,3 +10,8 @@
      (if position
        (filter #(= (:position %) position) items)
        items))))
+
+(rf/reg-sub
+ ::loading?
+ (fn [db]
+   (::db/loading? db)))

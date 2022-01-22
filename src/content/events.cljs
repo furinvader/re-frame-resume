@@ -14,13 +14,15 @@
  ::load-elements-process
  (fn-traced
   [db]
-  db))
+  (assoc db ::db/loading? true)))
 
 (rf/reg-event-db
  ::load-elements-success
  (fn-traced
   [db [_ elements]]
-  (assoc db ::db/elements elements)))
+  (-> db
+      (assoc ::db/elements elements)
+      (assoc ::db/loading? false))))
 
 (rf/reg-event-db
  ::load-elements-failure
