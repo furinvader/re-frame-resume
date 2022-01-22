@@ -1,7 +1,6 @@
 (ns app.core
   (:require
    [reagent.dom :as rdom]
-   [day8.re-frame.http-fx]
    [re-frame.core :as rf]
    [app.events :as events]
    [app.views :as views]
