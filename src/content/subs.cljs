@@ -5,4 +5,4 @@
 (rf/reg-sub
  ::elements
  (fn [db]
-   (::db/elements db)))
+   (vals (::db/elements db))))

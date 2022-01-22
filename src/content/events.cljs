@@ -7,11 +7,12 @@
 (rf/reg-event-fx
  ::load-elements
  (fn-traced []
-            {:http-xhrio {:method :get
-                          :uri "api/content"
-                          :response-format (ajax/json-response-format {:keywords? true})
-                          :on-success [::load-elements-success]
-                          :on-failure [::load-elements-failure]}}))
+            {:http-xhrio
+             {:method :get
+              :uri "api/content"
+              :response-format (ajax/json-response-format {:keywords? true})
+              :on-success [::load-elements-success]
+              :on-failure [::load-elements-failure]}}))
 
 (rf/reg-event-db
  ::load-elements-success
