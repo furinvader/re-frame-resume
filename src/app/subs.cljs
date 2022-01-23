@@ -6,8 +6,3 @@
  ::name
  (fn [db]
    (:name db)))
-
-(rf/reg-sub
- ::hello-world
- (fn [db]
-   (:hello-world db)))
