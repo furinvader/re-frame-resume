@@ -1,10 +1,9 @@
 (ns app.styles
   (:require-macros
    [garden.def :refer [defcssfn]])
-  (:require
-   [spade.core   :refer [defglobal defclass]]
-   [garden.units :refer [deg px]]
-   [garden.color :refer [rgba]]))
+  (:require [garden.color :refer [rgba]]
+            [garden.units :refer [deg px]]
+            [spade.core   :refer [defclass defglobal]]))
 
 (defcssfn linear-gradient
   ([c1 p1 c2 p2]

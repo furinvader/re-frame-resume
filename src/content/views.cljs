@@ -11,7 +11,10 @@
   [:> Container {:maxWidth "lg"}
    [:> Grid {:container true :spacing {:xs 2}}
     [:> Grid {:item true :xs 1}
-     [:img {:src "img/bunnies.svg" :alt "🐇🐇" :width "100%"}]
+     [:div
+      {:style {:width "100%"
+               :height "100%"}
+       :class "bunnify"}]
      image]
     [:> Grid {:item true :xs 11} header]
     [:> Grid {:item true :xs 1} side]
