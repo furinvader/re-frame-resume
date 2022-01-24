@@ -17,7 +17,7 @@
  :dev-http
  {8280
   {:root "resources/public"
-   :proxy-url "https://api.alexdik.de"}
+   :proxy-url "https://alexdik.de"}
   8290 "target/browser-test"}
 
  :builds
