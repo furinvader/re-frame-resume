@@ -8,13 +8,7 @@
  ::load-elements
  (fn-traced
   [_ [event]]
-  {:fx [[:dispatch [::http/request event "api/content"]]]}))
-
-(rf/reg-event-db
- ::load-elements-process
- (fn-traced
-  [db]
-  (assoc db ::db/loading? true)))
+  {:dispatch [::http/request event "api/content"]}))
 
 (rf/reg-event-db
  ::load-elements-success

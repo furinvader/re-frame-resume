@@ -14,4 +14,4 @@
 (rf/reg-sub
  ::loading?
  (fn [db]
-   (::db/loading? db)))
+   (empty? (::db/elements db))))

@@ -7,9 +7,6 @@
 (defn extend-keyword [kw val]
   (keyword (namespace kw) (str (name kw) val)))
 
-(defn process [key]
-  (extend-keyword key "-process"))
-
 (defn success [key]
   (extend-keyword key "-success"))
 
@@ -20,8 +17,7 @@
  ::request
  (fn-traced
   [_ [_ event request]]
-  {:fx [[:dispatch [(process event)]]]
-   :http-xhrio
+  {:http-xhrio
    (merge
     {:method :get}
     (if (string? request) {:uri request} request)
