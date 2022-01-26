@@ -24,7 +24,7 @@
 (defn md-elements [elements]
   [:<>
    (for [{:keys [id text]} elements]
-     ^{:key id} [md/markdown text])])
+     ^{:key id} [md/mui text])])
 
 (defn header-skeleton []
   [:<>

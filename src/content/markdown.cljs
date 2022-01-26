@@ -3,19 +3,25 @@
             ["react-markdown" :default ReactMarkdown]
             [reagent.core :as r]))
 
+(defn reactify [comp-map]
+  (into {} (map #(update % 1 r/reactify-component) comp-map)))
+
+(defn markdown
+  ([md] [markdown {} md])
+  ([components md]
+   [:> ReactMarkdown {:components (reactify components)} md]))
+
 (defn h1 [props]
   [:> Typography (merge props {:variant "h1"})])
 
 (defn h2 [props]
   [:> Typography (merge props {:variant "h2"})])
 
-(defn body [props]
+(defn p [props]
   [:> Typography (merge props {:variant "body1"})])
 
-(def default-components
-  {:h1 (r/reactify-component h1)
-   :h2 (r/reactify-component h2)
-   :p (r/reactify-component body)})
+(def mui-defaults {:h1 h1 :h2 h2 :p p})
 
-(defn markdown [text]
-  [:> ReactMarkdown {:components default-components} text])
+(defn mui
+  ([md] [markdown mui-defaults md])
+  ([components md] [markdown (merge mui-defaults components) md]))
