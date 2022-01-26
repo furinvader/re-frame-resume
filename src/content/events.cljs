@@ -8,7 +8,7 @@
  ::load-elements
  (fn-traced
   [_ [event]]
-  {:dispatch [::http/request event "api/content"]}))
+  {:dispatch [::http/request event "api/content/home"]}))
 
 (rf/reg-event-db
  ::load-elements-success
