@@ -7,66 +7,60 @@
             [content.subs :as subs]
             [re-frame.core :as rf]))
 
-(defn grid-layout [image header main side footer]
-  [:> Container {:maxWidth "lg"}
-   [:> Grid {:container true :spacing {:xs 2}}
-    [:> Grid {:item true :xs 1}
-     [:div
-      {:style {:width "100%"
-               :height "100%"}
-       :class "bunnify"}]
-     image]
-    [:> Grid {:item true :xs 11} header]
-    [:> Grid {:item true :xs 1} side]
-    [:> Grid {:item true :xs 11} main]
-    [:> Grid {:item true :xs 12} footer]]])
-
 (defn md-elements [elements]
   [:<>
    (for [{:keys [id text]} elements]
      ^{:key id} [md/mui text])])
 
-(defn header-skeleton []
-  [:<>
-   [:> Typography {:variant "h1"} [:> Skeleton {:width "40%"}]]
-   [:> Typography {:variant "h2"} [:> Skeleton {:width "50%"}]]])
+(defn image-content []
+  [:div
+   {:style {:width "100%"
+            :height "100%"}
+    :class "bunnify"}])
 
-(defn main-skeleton []
-  [:<>
-   [:> Typography {:variant "h1"} [:> Skeleton {:width "50%"}]]
-   [:> Typography {:variant "body1"} [:> Skeleton]]
-   [:> Typography {:variant "body1"} [:> Skeleton]]
-   [:> Typography {:variant "body1"} [:> Skeleton]]
-   [:> Typography {:variant "body1"} [:> Skeleton]]
-   [:> Typography {:variant "body1"} [:> Skeleton]]
-   [:> Typography {:variant "body1"} [:> Skeleton {:width "30%"}]]])
+(defn header-content []
+  (let [elements @(rf/subscribe [::subs/elements "header"])
+        loading? @(rf/subscribe [::subs/loading? "header"])]
+    (if-not loading?
+      [md-elements elements]
+      [:<>
+       [:> Typography {:variant "h1"} [:> Skeleton {:width "40%"}]]
+       [:> Typography {:variant "h2"} [:> Skeleton {:width "50%"}]]])))
 
-(defn side-skeleton []
-  [:<>
-   [:> Skeleton {:variant "rectangular" :height 100}]])
+(defn side-content []
+  (let [elements @(rf/subscribe [::subs/elements "side"])
+        loading? @(rf/subscribe [::subs/loading? "side"])]
+    (if-not loading?
+      [md-elements elements]
+      [:<>
+       [:> Skeleton {:variant "rectangular" :height 100}]])))
 
-(defn footer-skeleton []
-  [:<>
-   [:> Typography {:variant "body2"} [:> Skeleton]]])
+(defn main-content []
+  (let [elements @(rf/subscribe [::subs/elements "main"])
+        loading? @(rf/subscribe [::subs/loading? "main"])]
+    (if-not loading?
+      [md-elements elements]
+      [:<>
+       [:> Typography {:variant "h1"} [:> Skeleton {:width "50%"}]]
+       [:> Typography {:variant "body1"} [:> Skeleton]]
+       [:> Typography {:variant "body1"} [:> Skeleton]]
+       [:> Typography {:variant "body1"} [:> Skeleton]]
+       [:> Typography {:variant "body1"} [:> Skeleton]]
+       [:> Typography {:variant "body1"} [:> Skeleton]]
+       [:> Typography {:variant "body1"} [:> Skeleton {:width "30%"}]]])))
 
-(defn skeleton-content []
-  (let [image ""
-        header [header-skeleton]
-        main [main-skeleton]
-        side [side-skeleton]
-        footer [footer-skeleton]]
-    [grid-layout image header main side footer]))
-
-(defn loaded-content []
-  (let [image [md-elements @(rf/subscribe [::subs/elements "image"])]
-        header [md-elements @(rf/subscribe [::subs/elements "header"])]
-        main [md-elements @(rf/subscribe [::subs/elements "main"])]
-        side [md-elements @(rf/subscribe [::subs/elements "side"])]
-        footer [md-elements @(rf/subscribe [::subs/elements "footer"])]]
-    [grid-layout image header main side footer]))
+(defn footer-content []
+  (let [elements @(rf/subscribe [::subs/elements "footer"])
+        loading? @(rf/subscribe [::subs/loading? "footer"])]
+    (if-not loading?
+      [md-elements elements]
+      [:> Typography {:variant "body2"} [:> Skeleton]])))
 
 (defn content-renderer []
-  (let [loading? @(rf/subscribe [::subs/loading?])]
-    (if loading?
-      [skeleton-content]
-      [loaded-content])))
+  [:> Container {:maxWidth "lg"}
+   [:> Grid {:container true :spacing {:xs 2}}
+    [:> Grid {:item true :xs 1} [image-content]]
+    [:> Grid {:item true :xs 11} [header-content]]
+    [:> Grid {:item true :xs 1} [side-content]]
+    [:> Grid {:item true :xs 11} [main-content]]
+    [:> Grid {:item true :xs 12} [footer-content]]]])

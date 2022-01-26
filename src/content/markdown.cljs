@@ -7,7 +7,8 @@
   (into {} (map #(update % 1 r/reactify-component) comp-map)))
 
 (defn markdown
-  ([md] [markdown {} md])
+  ([md]
+   [markdown {} md])
   ([components md]
    [:> ReactMarkdown {:components (reactify components)} md]))
 
@@ -23,5 +24,7 @@
 (def mui-defaults {:h1 h1 :h2 h2 :p p})
 
 (defn mui
-  ([md] [markdown mui-defaults md])
-  ([components md] [markdown (merge mui-defaults components) md]))
+  ([md]
+   [markdown mui-defaults md])
+  ([components md]
+   [markdown (merge mui-defaults components) md]))
