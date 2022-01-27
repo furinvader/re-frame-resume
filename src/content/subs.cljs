@@ -15,3 +15,7 @@
  ::loading?
  (fn [db]
    (empty? (::db/elements db))))
+
+(rf/reg-sub
+ ::navigation
+ #(sort-by :sorting (vals (::db/pages %))))

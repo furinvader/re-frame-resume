@@ -10,7 +10,7 @@
  (fn-traced
   []
   {:db db/default-db
-   :fx [[:dispatch [::content.events/load-elements]]]}))
+   :fx [[:dispatch [::content.events/load-pages]]]}))
 
 (rf/reg-event-fx
  ::view-ready

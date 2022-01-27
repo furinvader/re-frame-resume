@@ -56,9 +56,14 @@
       [md-elements elements]
       [:> Typography {:variant "body2"} [:> Skeleton]])))
 
+(defn navigation []
+  (let [items @(rf/subscribe [::subs/navigation])]
+    [:div (str items)]))
+
 (defn content-renderer []
   [:> Container {:maxWidth "lg"}
    [:> Grid {:container true :spacing {:xs 2}}
+    [:> Grid {:item true :xs 12} [navigation]]
     [:> Grid {:item true :xs 1} [image-content]]
     [:> Grid {:item true :xs 11} [header-content]]
     [:> Grid {:item true :xs 1} [side-content]]

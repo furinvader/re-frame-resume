@@ -4,21 +4,42 @@
             [http.events :as http]
             [re-frame.core :as rf]))
 
+(defn normalize [entities]
+  (into {} (map #(vector (:id %) %) entities)))
+
+(rf/reg-event-fx
+ ::load-pages
+ (fn-traced
+  [_ [event]]
+  {:dispatch [::http/request event "pages"]}))
+
+(rf/reg-event-fx
+ ::load-pages-success
+ (fn-traced
+  [{:keys [db]} [_ pages]]
+  {:db (assoc db ::db/pages (normalize pages))
+   :fx [[:dispatch [::load-elements (:id (get pages 0))]]]}))
+
+(rf/reg-event-db
+ ::load-pages-failure
+ (fn-traced
+  [db [_ pages]]
+  (assoc db ::db/pages {})))
+
 (rf/reg-event-fx
  ::load-elements
  (fn-traced
-  [_ [event]]
-  {:dispatch [::http/request event "api/content/home"]}))
+  [_ [event id]]
+  {:dispatch [::http/request event {:uri "pages" :params {:id id :type 2}}]}))
 
 (rf/reg-event-db
  ::load-elements-success
  (fn-traced
   [db [_ elements]]
-  (-> db
-      (assoc ::db/elements elements)
-      (assoc ::db/loading? false))))
+  (assoc db ::db/elements (normalize elements))))
 
 (rf/reg-event-db
  ::load-elements-failure
- (fn-traced [db [_ _]]
-            (assoc db ::db/elements [])))
+ (fn-traced
+  [db [_ _]]
+  (assoc db ::db/elements {})))
