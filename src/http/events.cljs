@@ -16,11 +16,12 @@
 (rf/reg-event-fx
  ::request
  (fn-traced
-  [_ [_ event request]]
+  [_ [_ event [method uri params]]]
   {:http-xhrio
    (merge
-    {:method :get}
-    (if (string? request) {:uri request} request)
+    {:method method
+     :uri uri
+     :params params}
     {:response-format (ajax/json-response-format {:keywords? true})
      :on-success [(success event)]
      :on-failure [(failure event)]})}))

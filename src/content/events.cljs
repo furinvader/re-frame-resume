@@ -11,7 +11,7 @@
  ::load-pages
  (fn-traced
   [_ [event]]
-  {:dispatch [::http/request event "pages"]}))
+  {:dispatch [::http/request event [:get "pages"]]}))
 
 (rf/reg-event-fx
  ::load-pages-success
@@ -30,7 +30,7 @@
  ::load-elements
  (fn-traced
   [_ [event id]]
-  {:dispatch [::http/request event {:uri "contents" :params {:page id}}]}))
+  {:dispatch [::http/request event [:get "contents" {:page id}]]}))
 
 (rf/reg-event-db
  ::load-elements-success
