@@ -18,10 +18,9 @@
  (fn-traced
   [_ [_ event [method uri params]]]
   {:http-xhrio
-   (merge
-    {:method method
-     :uri uri
-     :params params}
-    {:response-format (ajax/json-response-format {:keywords? true})
-     :on-success [(success event)]
-     :on-failure [(failure event)]})}))
+   {:method method
+    :uri uri
+    :params params
+    :response-format (ajax/json-response-format {:keywords? true})
+    :on-success [(success event)]
+    :on-failure [(failure event)]}}))
