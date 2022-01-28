@@ -30,7 +30,7 @@
  ::load-elements
  (fn-traced
   [_ [event id]]
-  {:dispatch [::http/request event {:uri "pages" :params {:id id :type 2}}]}))
+  {:dispatch [::http/request event {:uri "contents" :params {:page id}}]}))
 
 (rf/reg-event-db
  ::load-elements-success
