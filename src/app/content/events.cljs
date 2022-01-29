@@ -1,7 +1,7 @@
-(ns content.events
-  (:require [content.db :as db]
+(ns app.content.events
+  (:require [app.content.db :as db]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
-            [http.events :as http]
+            [app.http.events :as http]
             [re-frame.core :as rf]))
 
 (defn normalize [entities]

@@ -1,10 +1,10 @@
-(ns content.views
+(ns app.content.views
   (:require ["@mui/material/Container" :default Container]
             ["@mui/material/Grid" :default Grid]
             ["@mui/material/Skeleton" :default Skeleton]
             ["@mui/material/Typography" :default Typography]
-            [content.markdown :as md]
-            [content.subs :as subs]
+            [app.content.markdown :as md]
+            [app.content.subs :as subs]
             [re-frame.core :as rf]))
 
 (defn md-elements [elements]

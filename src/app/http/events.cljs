@@ -1,4 +1,4 @@
-(ns http.events
+(ns app.http.events
   (:require [ajax.core :as ajax]
             [day8.re-frame.http-fx]
             [day8.re-frame.tracing :refer-macros [fn-traced]]

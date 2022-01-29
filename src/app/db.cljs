@@ -1,5 +1,5 @@
 (ns app.db
-  (:require [content.db]))
+  (:require [app.content.db :as content]))
 
 (def default-db
-  content.db/default-db)
+  content/default-db)

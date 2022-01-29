@@ -1,4 +1,4 @@
-(ns content.db)
+(ns app.content.db)
 
 (def default-db
   {::pages {}
