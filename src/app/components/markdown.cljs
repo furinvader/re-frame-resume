@@ -1,4 +1,4 @@
-(ns app.content.markdown
+(ns app.components.markdown
   (:require ["@mui/material/Typography" :default Typography]
             ["react-markdown" :default ReactMarkdown]
             [reagent.core :as r]))

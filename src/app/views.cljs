@@ -1,9 +1,10 @@
 (ns app.views
-  (:require ["@mui/material/Container" :default Container]
+  (:require ["@mui/material/AppBar" :default AppBar]
+            ["@mui/material/Container" :default Container]
             ["@mui/material/Grid" :default Grid]
             ["@mui/material/Skeleton" :default Skeleton]
             ["@mui/material/Typography" :default Typography]
-            [app.content.markdown :as md]
+            [app.components.markdown :as md]
             [app.subs :as subs]
             [re-frame.core :as rf]))
 
@@ -58,12 +59,14 @@
 
 (defn navigation []
   (let [items @(rf/subscribe [::subs/navigation])]
-    [:div (str items)]))
+    [:> AppBar {:position "static"}
+     (for [{:keys [id path title nav]} items]
+       ^{:key id} [:a {:href path :title title} nav])]))
 
 (defn app []
   [:> Container {:maxWidth "lg"}
+   [navigation]
    [:> Grid {:container true :spacing {:xs 2}}
-    [:> Grid {:item true :xs 12} [navigation]]
     [:> Grid {:item true :xs 1} [image]]
     [:> Grid {:item true :xs 11} [header]]
     [:> Grid {:item true :xs 1} [side]]
