@@ -4,7 +4,7 @@
             ["@mui/material/Skeleton" :default Skeleton]
             ["@mui/material/Typography" :default Typography]
             [app.content.markdown :as md]
-            [app.content.subs :as subs]
+            [app.subs :as subs]
             [re-frame.core :as rf]))
 
 (defn md-elements [elements]
