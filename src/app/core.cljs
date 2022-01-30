@@ -13,7 +13,7 @@
   (rf/clear-subscription-cache!)
   (let [root-el (.getElementById js/document "app")]
     (rdom/unmount-component-at-node root-el)
-    (rdom/render [views/main-panel] root-el #(rf/dispatch [::events/view-ready]))))
+    (rdom/render [views/app] root-el #(rf/dispatch [::events/view-ready]))))
 
 (defn init []
   (rf/dispatch-sync [::events/initialize])

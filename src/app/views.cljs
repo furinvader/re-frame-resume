@@ -1,5 +1,5 @@
 (ns app.views
   (:require [app.content.views :as content.views]))
 
-(defn main-panel []
+(defn app []
   [content.views/content-renderer])
