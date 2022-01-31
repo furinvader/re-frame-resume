@@ -6,7 +6,9 @@
             ["@mui/material/Typography" :default Typography]
             [app.components.markdown :as md]
             [app.subs :as subs]
-            [re-frame.core :as rf]))
+            [re-frame.core :as rf]
+            [reagent.core :as r]
+            ["react-router-dom" :refer (HashRouter Routes Route Link)]))
 
 (defn md-elements [elements]
   [:<>
@@ -60,10 +62,10 @@
 (defn navigation []
   (let [items @(rf/subscribe [::subs/navigation])]
     [:> AppBar {:position "static"}
-     (for [{:keys [id path title nav]} items]
-       ^{:key id} [:a {:href path :title title} nav])]))
+     (for [{:keys [id path nav]} items]
+       ^{:key id} [:> Link {:to path} nav])]))
 
-(defn app []
+(defn page []
   [:> Container {:maxWidth "lg"}
    [navigation]
    [:> Grid {:container true :spacing {:xs 2}}
@@ -72,3 +74,8 @@
     [:> Grid {:item true :xs 1} [side]]
     [:> Grid {:item true :xs 11} [main]]
     [:> Grid {:item true :xs 12} [footer]]]])
+
+(defn app []
+  [:> HashRouter
+   [:> Routes
+    [:> Route {:path "/" :element (r/as-element [page])}]]])
