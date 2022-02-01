@@ -1,18 +1,18 @@
 (ns app.views
   (:require ["@mui/material/AppBar" :default AppBar]
+            ["@mui/material/Button" :default Button]
             ["@mui/material/Container" :default Container]
             ["@mui/material/Grid" :default Grid]
+            ["@mui/material/Link" :default Link]
             ["@mui/material/Skeleton" :default Skeleton]
             ["@mui/material/Toolbar" :default Toolbar]
-            ["@mui/material/Link" :default Link]
-            ["@mui/material/Button" :default Button]
             ["@mui/material/Typography" :default Typography]
             [app.components.markdown :as md]
             [app.subs :as subs]
             [re-frame.core :as rf]
-            [reagent.core :as r]
             ["react-router-dom" :refer (HashRouter Routes Route Link)
-             :rename {Link RouteLink}]))
+             :rename {Link RouteLink}]
+            [reagent.core :as r]))
 
 (defn md-elements [elements]
   [:<>
@@ -67,14 +67,14 @@
   (let [items @(rf/subscribe [::subs/navigation])]
     [:> AppBar {:position "static"}
      [:> Toolbar
-      (for [{:keys [id path nav]} items]
+      (for [{:keys [id path title nav]} items]
         ^{:key id} [:> Button
                     [:> Link
                      {:underline "none"
                       :color "white"
                       :component RouteLink
                       :to path}
-                     nav]])]]))
+                     (if (empty? nav) title nav)]])]]))
 
 (defn page []
   [:> Container {:maxWidth "lg"}
