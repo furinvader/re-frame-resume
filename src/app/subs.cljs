@@ -1,6 +1,7 @@
 (ns app.subs
-  (:require [re-frame.core :as rf]
-            [app.content.db :as content.db]))
+  (:require [app.content.db :as content.db]
+            [app.entities.subs :as entities]
+            [re-frame.core :as rf]))
 
 (rf/reg-sub
  ::elements
@@ -17,4 +18,5 @@
 
 (rf/reg-sub
  ::navigation
- #(sort-by :sorting (vals (::content.db/pages %))))
+ :<- [::entities/items :pages]
+ identity)

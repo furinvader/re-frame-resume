@@ -1,7 +1,8 @@
 (ns app.content.events
   (:require [app.content.db :as db]
-            [day8.re-frame.tracing :refer-macros [fn-traced]]
+            [app.entities.events :as entities]
             [app.http.events :as http]
+            [day8.re-frame.tracing :refer-macros [fn-traced]]
             [re-frame.core :as rf]))
 
 (defn normalize [entities]
@@ -16,9 +17,9 @@
 (rf/reg-event-fx
  ::load-pages-success
  (fn-traced
-  [{:keys [db]} [_ pages]]
-  {:db (assoc db ::db/pages (normalize pages))
-   :fx [[:dispatch [::load-elements (:id (get pages 0))]]]}))
+  [_ [_ pages]]
+  {:fx [[:dispatch [::load-elements (:id (get pages 0))]]
+        [:dispatch [::entities/add :pages pages]]]}))
 
 (rf/reg-event-db
  ::load-pages-failure
