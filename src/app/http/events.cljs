@@ -4,6 +4,8 @@
             [day8.re-frame.tracing :refer-macros [fn-traced]]
             [re-frame.core :as rf]))
 
+(goog-define base-url "")
+
 (defn extend-keyword [kw val]
   (keyword (namespace kw) (str (name kw) val)))
 
@@ -19,7 +21,7 @@
   [_ [_ event [method uri params]]]
   {:http-xhrio
    {:method method
-    :uri uri
+    :uri (str base-url "/" uri)
     :params params
     :response-format (ajax/json-response-format {:keywords? true})
     :on-success [(success event)]

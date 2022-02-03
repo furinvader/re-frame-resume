@@ -17,8 +17,7 @@
 
  :dev-http
  {8280
-  {:root "resources/public"
-   :proxy-url "https://api.alexdik.de"}
+  {:root "resources/public"}
   8290 "target/browser-test"}
 
  :builds
@@ -34,7 +33,8 @@
    {:compiler-options
     {:closure-defines
      {re-frame.trace.trace-enabled? true
-      day8.re-frame.tracing.trace-enabled? true}}}
+      day8.re-frame.tracing.trace-enabled? true
+      app.http.events/base-url "https://api.alexdik.de"}}}
    :release
    {:build-options
     {:ns-aliases
