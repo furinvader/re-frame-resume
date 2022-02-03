@@ -10,7 +10,7 @@
             [app.components.markdown :as md]
             [app.subs :as subs]
             [re-frame.core :as rf]
-            ["react-router-dom" :refer (HashRouter Routes Route Link)
+            ["react-router-dom" :refer (BrowserRouter Routes Route Link)
              :rename {Link RouteLink}]
             [reagent.core :as r]))
 
@@ -76,17 +76,26 @@
                       :to path}
                      (if (empty? nav) title nav)]])]]))
 
-(defn page []
+(defn app-page []
+  [:> Grid {:container true :spacing {:xs 2}}
+   [:> Grid {:item true :xs 1} [image]]
+   [:> Grid {:item true :xs 11} [header]]
+   [:> Grid {:item true :xs 1} [side]]
+   [:> Grid {:item true :xs 11} [main]]
+   [:> Grid {:item true :xs 12} [footer]]])
+
+(defn app-routes []
+  [:> Routes
+   [:> Route {:path "*" :element (r/as-element [:span "loading"])}]
+   (let [nav-items @(rf/subscribe [::subs/navigation])]
+     (for [{:keys [id path]} nav-items]
+       [:> Route {:key id :path path :element (r/as-element [app-page])}]))])
+
+(defn app-base []
   [:> Container {:maxWidth "lg"}
    [navigation]
-   [:> Grid {:container true :spacing {:xs 2}}
-    [:> Grid {:item true :xs 1} [image]]
-    [:> Grid {:item true :xs 11} [header]]
-    [:> Grid {:item true :xs 1} [side]]
-    [:> Grid {:item true :xs 11} [main]]
-    [:> Grid {:item true :xs 12} [footer]]]])
+   [app-routes]])
 
 (defn app []
-  [:> HashRouter
-   [:> Routes
-    [:> Route {:path "/" :element (r/as-element [page])}]]])
+  [:> BrowserRouter
+   [app-base]])
