@@ -86,10 +86,7 @@
 
 (defn app-routes []
   [:> Routes
-   [:> Route {:path "*" :element (r/as-element [:span "loading"])}]
-   (let [nav-items @(rf/subscribe [::subs/navigation])]
-     (for [{:keys [id path]} nav-items]
-       [:> Route {:key id :path path :element (r/as-element [app-page])}]))])
+   [:> Route {:path "*" :element (r/as-element [app-page])}]])
 
 (defn app-base []
   [:> Container {:maxWidth "lg"}
