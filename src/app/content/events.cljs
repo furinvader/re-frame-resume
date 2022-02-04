@@ -11,8 +11,9 @@
 (rf/reg-event-fx
  ::load-pages
  (fn-traced
-  [_ [event]]
-  {:dispatch [::http/request event [:get "pages"]]}))
+  []
+  {:dispatch [::http/request [:get "pages"]
+              {:success [::load-pages-success]}]}))
 
 (rf/reg-event-fx
  ::load-pages-success
@@ -21,26 +22,15 @@
   {:fx [[:dispatch [::load-elements (:id (get pages 0))]]
         [:dispatch [::entities/add :pages pages]]]}))
 
-(rf/reg-event-db
- ::load-pages-failure
- (fn-traced
-  [db [_ pages]]
-  (assoc db ::db/pages {})))
-
 (rf/reg-event-fx
  ::load-elements
  (fn-traced
-  [_ [event id]]
-  {:dispatch [::http/request event [:get "contents" {:page id}]]}))
+  [_ [_ id]]
+  {:dispatch [::http/request [:get "contents" {:page id}]
+              {:success [::load-elements-success]}]}))
 
 (rf/reg-event-db
  ::load-elements-success
  (fn-traced
   [db [_ elements]]
   (assoc db ::db/elements (normalize elements))))
-
-(rf/reg-event-db
- ::load-elements-failure
- (fn-traced
-  [db [_ _]]
-  (assoc db ::db/elements {})))

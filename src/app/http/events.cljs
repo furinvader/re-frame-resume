@@ -6,23 +6,19 @@
 
 (goog-define base-url "")
 
-(defn extend-keyword [kw val]
-  (keyword (namespace kw) (str (name kw) val)))
-
-(defn success [key]
-  (extend-keyword key "-success"))
-
-(defn failure [key]
-  (extend-keyword key "-failure"))
-
 (rf/reg-event-fx
  ::request
  (fn-traced
-  [_ [_ event [method uri params]]]
+  [_ [_ [method uri params]  {:keys [success failure]}]]
   {:http-xhrio
-   {:method method
-    :uri (str base-url "/" uri)
-    :params params
-    :response-format (ajax/json-response-format {:keywords? true})
-    :on-success [(success event)]
-    :on-failure [(failure event)]}}))
+   (merge
+    {:method method
+     :uri (str base-url "/" uri)
+     :params params
+     :response-format (ajax/json-response-format {:keywords? true})}
+
+    (when-not (nil? success)
+      {:on-success success})
+
+    (when-not (nil? failure)
+      {:on-failure failure}))}))
