@@ -9,7 +9,7 @@
 (rf/reg-event-fx
  ::request
  (fn-traced
-  [_ [_ [method uri params]  [success failure]]]
+  [_ [_ [method uri params] [success failure]]]
   {:http-xhrio
    (merge
     {:method method
