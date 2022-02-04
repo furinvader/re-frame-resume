@@ -8,6 +8,7 @@
             ["@mui/material/Toolbar" :default Toolbar]
             ["@mui/material/Typography" :default Typography]
             [app.components.markdown :as md]
+            [app.routing.views :as routing]
             [app.subs :as subs]
             [re-frame.core :as rf]
             ["react-router-dom" :refer (BrowserRouter Routes Route Link)
@@ -86,7 +87,8 @@
 
 (defn app-routes []
   [:> Routes
-   [:> Route {:path "*" :element (r/as-element [app-page])}]])
+   [:> Route {:path "*"
+              :element (r/as-element [routing/path-changed [app-page]])}]])
 
 (defn app-base []
   [:> Container {:maxWidth "lg"}
