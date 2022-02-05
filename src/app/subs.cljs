@@ -1,20 +1,21 @@
 (ns app.subs
-  (:require [app.content.db :as content.db]
-            [app.entities.subs :as entities]
+  (:require [app.entities.subs :as entities]
+            [app.routing.subs :as routing]
             [re-frame.core :as rf]))
 
 (rf/reg-sub
- ::elements
- (fn [db [_ position]]
-   (let [values (vals (::content.db/elements db))
-         items (sort-by :sorting values)]
-     (if position
-       (filter #(= (:position %) position) items)
-       items))))
+ ::current-page
+ :<- [::routing/path]
+ :<- [::entities/query [:pages :by-path]]
+ (fn [[path pages]]
+   (get pages path)))
 
 (rf/reg-sub
- ::loading?
- #(empty? (::content.db/elements %)))
+ ::contents-by-position
+ :<- [::current-page]
+ :<- [::entities/query [:contents [:page :position]]]
+ (fn [[page contents] [_ position]]
+   (get-in contents [(:id page) position])))
 
 (rf/reg-sub
  ::navigation

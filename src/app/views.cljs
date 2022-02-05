@@ -27,8 +27,8 @@
     :class "bunnify"}])
 
 (defn header []
-  (let [elements @(rf/subscribe [::subs/elements "header"])
-        loading? @(rf/subscribe [::subs/loading? "header"])]
+  (let [elements @(rf/subscribe [::subs/contents-by-position "header"])
+        loading? (empty? elements)]
     (if-not loading?
       [md-elements elements]
       [:<>
@@ -36,16 +36,16 @@
        [:> Typography {:variant "h2"} [:> Skeleton {:width "50%"}]]])))
 
 (defn side []
-  (let [elements @(rf/subscribe [::subs/elements "side"])
-        loading? @(rf/subscribe [::subs/loading? "side"])]
+  (let [elements @(rf/subscribe [::subs/contents-by-position "side"])
+        loading? (empty? elements)]
     (if-not loading?
       [md-elements elements]
       [:<>
        [:> Skeleton {:variant "rectangular" :height 100}]])))
 
 (defn main []
-  (let [elements @(rf/subscribe [::subs/elements "main"])
-        loading? @(rf/subscribe [::subs/loading? "main"])]
+  (let [elements @(rf/subscribe [::subs/contents-by-position "main"])
+        loading? (empty? elements)]
     (if-not loading?
       [md-elements elements]
       [:<>
@@ -58,8 +58,8 @@
        [:> Typography {:variant "body1"} [:> Skeleton {:width "30%"}]]])))
 
 (defn footer []
-  (let [elements @(rf/subscribe [::subs/elements "footer"])
-        loading? @(rf/subscribe [::subs/loading? "footer"])]
+  (let [elements @(rf/subscribe [::subs/contents-by-position "footer"])
+        loading? (empty? elements)]
     (if-not loading?
       [md-elements elements]
       [:> Typography {:variant "body2"} [:> Skeleton]])))

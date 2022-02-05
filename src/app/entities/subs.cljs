@@ -16,3 +16,8 @@
  ::items
  #(rf/subscribe [::compound (get % 1)])
  c/items)
+
+(rf/reg-sub
+ ::query
+ :<- [::compounds]
+ #(get-in %1 (get %2 1)))

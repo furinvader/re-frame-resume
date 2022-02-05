@@ -4,8 +4,13 @@
             [day8.re-frame.tracing :refer-macros [fn-traced]]
             [re-frame.core :as rf]))
 
-(rf/reg-event-db
+(rf/reg-event-fx
  ::add
  (fn-traced
-  [db [_ type entities]]
-  (update-in db [::db/compounds type] c/add-items entities)))
+  [{:keys [db]} [_ type entities]]
+  {:db (update-in db [::db/compounds type] c/add-items entities)
+
+   :fx [(when (= type :pages)
+          (let [contents (flatten (map :contents entities))]
+            [:dispatch [::add :contents contents]]))]}))
+
