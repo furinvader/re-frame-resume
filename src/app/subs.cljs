@@ -21,3 +21,8 @@
  ::navigation
  :<- [::entities/items :pages]
  identity)
+
+(rf/reg-sub
+ ::loading?
+ :<- [::current-page]
+ #(empty? (:contents %)))

@@ -74,7 +74,7 @@
 
 (defn app-route []
   (let [pages @(rf/subscribe [::subs/navigation])
-        loading? (empty? pages)]
+        loading? @(rf/subscribe [::subs/loading?])]
     [:> Container {:maxWidth "lg"}
      [navigation pages]
      [:> Grid {:container true :spacing {:xs 2}}
