@@ -20,7 +20,7 @@
 (rf/reg-sub
  ::navigation
  :<- [::entities/items :pages]
- identity)
+ #(sort-by :sorting %))
 
 (rf/reg-sub
  ::loading?
