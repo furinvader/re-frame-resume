@@ -11,9 +11,8 @@
             [app.routing.views :as routing]
             [app.subs :as subs]
             [re-frame.core :as rf]
-            ["react-router-dom" :refer (BrowserRouter Routes Route Link)
-             :rename {Link RouteLink}]
-            [reagent.core :as r]))
+            ["react-router-dom" :refer (Link)
+             :rename {Link RouteLink}]))
 
 (defn navigation [pages]
   [:> AppBar {:position "static"}
@@ -72,7 +71,7 @@
 (defn footer-preview []
   [:> Typography {:variant "body2"} [:> Skeleton]])
 
-(defn app-route []
+(defn app-page []
   (let [pages @(rf/subscribe [::subs/navigation])
         loading? @(rf/subscribe [::subs/loading?])]
     [:> Container {:maxWidth "lg"}
@@ -93,7 +92,4 @@
        (when loading? [footer-preview])]]]))
 
 (defn app []
-  [:> BrowserRouter
-   [:> Routes
-    [:> Route {:path "*"
-               :element (r/as-element [routing/path-changed [app-route]])}]]])
+  [routing/page-router [app-page]])
