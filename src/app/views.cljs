@@ -11,8 +11,7 @@
             [app.routing.views :as routing]
             [app.subs :as subs]
             [re-frame.core :as rf]
-            ["react-router-dom" :refer (Link)
-             :rename {Link RouteLink}]))
+            ["react-router-dom" :as router]))
 
 (defn navigation [pages]
   [:> AppBar {:position "static"}
@@ -22,7 +21,7 @@
        [:> Link
         {:underline "none"
          :color "white"
-         :component RouteLink
+         :component router/Link
          :to path}
         (if (empty? nav) title nav)]])]])
 
