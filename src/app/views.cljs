@@ -8,9 +8,11 @@
             ["@mui/material/Toolbar" :default Toolbar]
             ["@mui/material/Typography" :default Typography]
             [app.components.markdown :as md]
+            [app.events :as events]
             [app.routing.views :as routing]
             [app.subs :as subs]
             [re-frame.core :as rf]
+            ["react" :as react]
             ["react-router-dom" :as router]))
 
 (defn navigation [pages]
@@ -90,5 +92,15 @@
        [footer @(rf/subscribe [::subs/contents-by-position "footer"])]
        (when loading? [footer-preview])]]]))
 
+(defn fc-set-title [children]
+  (let [page @(rf/subscribe [::subs/current-page])
+        title (:title page)]
+    (react/useEffect
+     #(rf/dispatch [::events/set-title title])
+     #js[title])
+    children))
+
 (defn app []
-  [routing/page-router [app-page]])
+  [:f> fc-set-title 
+   [routing/page-router 
+    [app-page]]])
