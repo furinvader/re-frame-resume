@@ -1,6 +1,7 @@
 (ns app.api.events
   (:require [app.entities.events :as entities]
             [app.http.events :as http]
+            [app.title.events :as title]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
             [re-frame.core :as rf]))
 
@@ -28,5 +29,6 @@
  ::get-page-success
  (fn-traced
   [_ [_ page]]
-  {:fx [[:dispatch [::entities/add :pages [page]]]
+  {:fx [[:dispatch [::title/set-title (:title page)]]
+        [:dispatch [::entities/add :pages [page]]]
         [:dispatch [::entities/add :contents (:contents page)]]]}))
