@@ -28,5 +28,5 @@
  ::get-page-success
  (fn-traced
   [_ [_ page]]
-  {:fx [[:dispatch [::entities/add :pages [page]]
-         :dispatch [::entities/add :contents (:contents page)]]]}))
+  {:fx [[:dispatch [::entities/add :pages [page]]]
+        [:dispatch [::entities/add :contents (:contents page)]]]}))

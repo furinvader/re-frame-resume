@@ -8,9 +8,5 @@
  ::add
  (fn-traced
   [{:keys [db]} [_ type entities]]
-  {:db (update-in db [::db/compounds type] c/add-items entities)
-
-   :fx [(when (= type :pages)
-          (let [contents (flatten (map :contents entities))]
-            [:dispatch [::add :contents contents]]))]}))
+  {:db (update-in db [::db/compounds type] c/add-items entities)}))
 
