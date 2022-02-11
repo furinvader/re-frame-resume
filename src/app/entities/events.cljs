@@ -9,4 +9,3 @@
  (fn-traced
   [{:keys [db]} [_ type entities]]
   {:db (update-in db [::db/compounds type] c/add-items entities)}))
-

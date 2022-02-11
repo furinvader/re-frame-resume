@@ -6,10 +6,12 @@
    {:pages
     (c/compound 
      [{:id :by-id
-       :kfn :id}
+       :kfn :id
+       :on-conflict merge}
       {:id :by-path
        :kfn :path
-       :index-type :one-to-one}])
+       :index-type :one-to-one
+       :on-conflict merge}])
 
     :contents
     (c/compound
