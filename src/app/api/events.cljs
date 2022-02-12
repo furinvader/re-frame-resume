@@ -15,7 +15,7 @@
  ::init-pages-success
  (fn-traced
   [_ [_ pages]]
-  {:fx [[:dispatch [::entities/add :pages pages]]]}))
+  {:dispatch [::entities/add :pages pages]}))
 
 (rf/reg-event-fx
  ::get-page
