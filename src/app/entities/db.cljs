@@ -12,7 +12,6 @@
        :kfn :path
        :index-type :one-to-one
        :on-conflict merge}])
-
     :contents
     (c/compound
      [{:id :by-id
@@ -22,3 +21,18 @@
        :index-type :one-to-many}
       {:path [:page :position]
        :index-type :nested-to-many}])}})
+
+(defn normalize [compounds type entities]
+  (as-> compounds cs
+    (update cs type c/add-items entities)
+    (case type
+      :pages 
+      (->> entities
+           (map :contents)
+           (flatten)
+           (normalize cs :contents))
+      cs)
+    ))
+
+(defn add-entities [db type entities]
+  (update db ::compounds normalize type entities))
