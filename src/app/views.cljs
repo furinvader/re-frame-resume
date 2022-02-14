@@ -93,14 +93,13 @@
        (when loading? [footer-preview])]]]))
 
 (defn fc-set-title [children]
-  (let [page @(rf/subscribe [::subs/current-page])
-        title (:title page)]
+  (let [title @(rf/subscribe [::subs/page-title])]
     (react/useEffect
      #(rf/dispatch [::events/set-title title])
      #js[title])
     children))
 
 (defn app []
-  [:f> fc-set-title 
-   [routing/page-router 
+  [:f> fc-set-title
+   [routing/page-router
     [app-page]]])

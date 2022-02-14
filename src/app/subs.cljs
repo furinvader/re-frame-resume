@@ -9,6 +9,11 @@
  identity)
 
 (rf/reg-sub
+ ::page-title
+ :<- [::current-page]
+ #(:title %))
+
+(rf/reg-sub
  ::contents-by-position
  :<- [::current-page]
  :<- [::entities/query [:contents [:page :position]]]
