@@ -5,10 +5,8 @@
 
 (rf/reg-sub
  ::current-page
- :<- [::routing/path]
- :<- [::entities/query [:pages :by-path]]
- (fn [[path pages]]
-   (get pages path)))
+ :<- [::routing/current-page]
+ identity)
 
 (rf/reg-sub
  ::contents-by-position
