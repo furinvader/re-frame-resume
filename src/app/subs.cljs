@@ -4,18 +4,13 @@
             [re-frame.core :as rf]))
 
 (rf/reg-sub
- ::current-page
- :<- [::routing/current-page]
- identity)
-
-(rf/reg-sub
  ::page-title
- :<- [::current-page]
+ :<- [::routing/current-page]
  #(:title %))
 
 (rf/reg-sub
  ::contents-by-position
- :<- [::current-page]
+ :<- [::routing/current-page]
  :<- [::entities/query [:contents [:page :position]]]
  (fn [[page contents] [_ position]]
    (get-in contents [(:id page) position])))
@@ -27,5 +22,5 @@
 
 (rf/reg-sub
  ::loading?
- :<- [::current-page]
+ :<- [::routing/current-page]
  #(empty? (:contents %)))
