@@ -17,9 +17,3 @@
  (fn-traced
   []
   {:fx [[::fx/remove-preloader]]}))
-
-(rf/reg-event-fx
- ::set-title
- (fn-traced
-  [_ [_ title]]
-  {::fx/title title}))

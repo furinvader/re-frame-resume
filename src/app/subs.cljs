@@ -4,11 +4,6 @@
             [re-frame.core :as rf]))
 
 (rf/reg-sub
- ::page-title
- :<- [::routing/current-page]
- #(:title %))
-
-(rf/reg-sub
  ::contents-by-position
  :<- [::routing/current-page]
  :<- [::entities/query [:contents [:page :position]]]

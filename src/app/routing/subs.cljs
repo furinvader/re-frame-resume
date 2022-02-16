@@ -5,10 +5,15 @@
 
 (rf/reg-sub
  ::path
- #(::db/path %1))
+ #(::db/path %))
 
 (rf/reg-sub
  ::current-page
  :<- [::entities/query [:pages :by-path]]
  :<- [::path]
  #(apply get %))
+
+(rf/reg-sub
+ ::page-title
+ :<- [::current-page]
+ #(:title %))

@@ -7,8 +7,3 @@
  (fn []
    (let [preloader (js/document.getElementById "preloader")]
      (.classList.add preloader (styles/preloader-done)))))
-
-(rf/reg-fx
- ::title
- (fn [title]
-   (set! (.-title js/document) title)))
