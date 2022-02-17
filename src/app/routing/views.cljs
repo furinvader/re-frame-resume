@@ -16,8 +16,8 @@
 (defn path-changed [children]
   [:f> fc-path-changed children])
 
-(defn page-router [page]
+(defn page-router [component]
   [:> router/BrowserRouter
    [:> router/Routes
     [:> router/Route {:path "*"
-                      :element (r/as-element [path-changed page])}]]])
+                      :element (r/as-element [path-changed component])}]]])
