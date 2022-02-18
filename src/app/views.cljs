@@ -22,25 +22,15 @@
    (for [{:keys [id text]} elements]
      ^{:key id} [md/mui text])])
 
-(defn header [contents]
-  [md-elements contents])
-
-(defn side [contents]
-  [md-elements contents])
-
-(defn main [contents]
-  [md-elements contents])
-
-(defn footer [contents]
-  [md-elements contents])
-
-(defn side-preview []
-  [:> Skeleton {:variant "rectangular" :height 100}])
-
 (defn header-preview []
   [:<>
    [:> Typography {:variant "h1"} [:> Skeleton {:width "40%"}]]
    [:> Typography {:variant "h2"} [:> Skeleton {:width "50%"}]]])
+
+(defn header []
+  [:<>
+   [md-elements @(rf/subscribe [::subs/contents-by-position "header"])]
+   (when @(rf/subscribe [::subs/loading?]) [header-preview])])
 
 (defn main-preview []
   [:<>
@@ -52,28 +42,37 @@
    [:> Typography {:variant "body1"} [:> Skeleton]]
    [:> Typography {:variant "body1"} [:> Skeleton {:width "30%"}]]])
 
+(defn main []
+  [:<>
+   [md-elements @(rf/subscribe [::subs/contents-by-position "main"])]
+   (when @(rf/subscribe [::subs/loading?]) [main-preview])])
+
+(defn side-preview []
+  [:> Skeleton {:variant "rectangular" :height 100}])
+
+(defn side []
+  [:<>
+   [md-elements @(rf/subscribe [::subs/contents-by-position "side"])]
+   (when @(rf/subscribe [::subs/loading?]) [side-preview])])
+
 (defn footer-preview []
   [:> Typography {:variant "body2"} [:> Skeleton]])
 
+(defn footer []
+  [:<>
+   [md-elements @(rf/subscribe [::subs/contents-by-position "footer"])]
+   (when @(rf/subscribe [::subs/loading?]) [footer-preview])])
+
 (defn app-page []
-  (let [loading? @(rf/subscribe [::subs/loading?])]
-    [:> Container {:maxWidth "lg"}
-     [:> AppBar {:position "static"}
-      [:> Toolbar [routing/main-nav]]]
-     [:> Grid {:container true :spacing {:xs 2}}
-      [:> Grid {:item true :xs 1} [image]]
-      [:> Grid {:item true :xs 11}
-       [header @(rf/subscribe [::subs/contents-by-position "header"])
-        (when loading? [header-preview])]]
-      [:> Grid {:item true :xs 1}
-       [side @(rf/subscribe [::subs/contents-by-position "side"])]
-       (when loading? [side-preview])]
-      [:> Grid {:item true :xs 11}
-       [main @(rf/subscribe [::subs/contents-by-position "main"])]
-       (when loading? [main-preview])]
-      [:> Grid {:item true :xs 12}
-       [footer @(rf/subscribe [::subs/contents-by-position "footer"])]
-       (when loading? [footer-preview])]]]))
+  [:> Container {:maxWidth "lg"}
+   [:> AppBar {:position "static"}
+    [:> Toolbar [routing/main-nav]]]
+   [:> Grid {:container true :spacing {:xs 2}}
+    [:> Grid {:item true :xs 1} [image]]
+    [:> Grid {:item true :xs 11} [header]]
+    [:> Grid {:item true :xs 1} [side]]
+    [:> Grid {:item true :xs 11} [main]]
+    [:> Grid {:item true :xs 12} [footer]]]])
 
 (defn app []
   [routing/page-router [app-page]])
