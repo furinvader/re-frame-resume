@@ -14,6 +14,6 @@
  #(apply get %))
 
 (rf/reg-sub
- ::page-title
- :<- [::current-page]
- #(:title %))
+ ::pages
+ :<- [::entities/items :pages]
+ #(sort-by :sorting %))

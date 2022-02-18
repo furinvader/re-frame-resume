@@ -11,11 +11,6 @@
    (get-in contents [(:id page) position])))
 
 (rf/reg-sub
- ::navigation
- :<- [::entities/items :pages]
- #(sort-by :sorting %))
-
-(rf/reg-sub
  ::loading?
  :<- [::routing/current-page]
  #(empty? (:contents %)))

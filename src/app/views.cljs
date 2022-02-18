@@ -1,29 +1,14 @@
 (ns app.views
   (:require ["@mui/material/AppBar" :default AppBar]
-            ["@mui/material/Button" :default Button]
             ["@mui/material/Container" :default Container]
             ["@mui/material/Grid" :default Grid]
-            ["@mui/material/Link" :default Link]
             ["@mui/material/Skeleton" :default Skeleton]
             ["@mui/material/Toolbar" :default Toolbar]
             ["@mui/material/Typography" :default Typography]
             [app.components.markdown :as md]
             [app.routing.views :as routing]
             [app.subs :as subs]
-            [re-frame.core :as rf]
-            ["react-router-dom" :as router]))
-
-(defn navigation [pages]
-  [:> AppBar {:position "static"}
-   [:> Toolbar
-    (for [{:keys [id path title nav]} pages]
-      [:> Button {:key id}
-       [:> Link
-        {:underline "none"
-         :color "white"
-         :component router/Link
-         :to path}
-        (if (empty? nav) title nav)]])]])
+            [re-frame.core :as rf]))
 
 (defn image []
   [:div
@@ -71,10 +56,10 @@
   [:> Typography {:variant "body2"} [:> Skeleton]])
 
 (defn app-page []
-  (let [pages @(rf/subscribe [::subs/navigation])
-        loading? @(rf/subscribe [::subs/loading?])]
+  (let [loading? @(rf/subscribe [::subs/loading?])]
     [:> Container {:maxWidth "lg"}
-     [navigation pages]
+     [:> AppBar {:position "static"}
+      [:> Toolbar [routing/main-nav]]]
      [:> Grid {:container true :spacing {:xs 2}}
       [:> Grid {:item true :xs 1} [image]]
       [:> Grid {:item true :xs 11}
