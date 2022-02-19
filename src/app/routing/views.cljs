@@ -20,10 +20,13 @@
   [:f> fc-path-changed children])
 
 (defn page-router [component]
-  [:> router/BrowserRouter
-   [:> router/Routes
-    [:> router/Route {:path "*"
-                      :element (r/as-element [path-changed component])}]]])
+  (let [routes @(rf/subscribe [::subs/pages])]
+    [:> router/BrowserRouter
+     [:> router/Routes
+      (for [route routes]
+        [:> router/Route {:key (:id route)
+                          :path (:path route)
+                          :element (r/as-element [path-changed component])}])]]))
 
 (defn main-nav []
   (let [pages @(rf/subscribe [::subs/pages])]
