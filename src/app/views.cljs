@@ -60,7 +60,11 @@
                 :spacing {:xs 2}
                 :sx {:justifyContent "space-between"}}
        [:> Grid {:item true :xs 1} [image]]
-       [:> Grid {:item true :xs 11 :sx {:alignSelf "center"}}
+       [:> Grid {:item true
+                 :xs 11
+                 :sx {:display "flex"
+                      :alignSelf "center"
+                      :justifyContent "flex-end"}}
         [routing/main-nav]]]]]]
    [:> Box {:sx {:bgcolor "grey.200"}}
     [:> Container {:maxWidth "lg"}

@@ -31,7 +31,7 @@
 
 (defn main-nav []
   (let [pages @(rf/subscribe [::subs/pages])]
-    [:nav {:style {:float "right"}}
+    [:nav
      (for [{:keys [id path title nav]} pages]
        [:> Button {:key id}
         [:> Link
