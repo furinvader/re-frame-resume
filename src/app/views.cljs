@@ -23,14 +23,6 @@
    (for [{:keys [id text]} elements]
      ^{:key id} [md/mui text])])
 
-(defn header []
-  [:<>
-   [md-elements @(rf/subscribe [::subs/contents-by-position "header"])]
-   (when @(rf/subscribe [::subs/loading?])
-     [:<>
-      [:> Typography {:variant "h1"} [:> Skeleton {:width "40%"}]]
-      [:> Typography {:variant "h2"} [:> Skeleton {:width "50%"}]]])])
-
 (defn main []
   [:<>
    [md-elements @(rf/subscribe [::subs/contents-by-position "main"])]
@@ -56,21 +48,31 @@
    (when @(rf/subscribe [::subs/loading?])
      [:> Typography {:variant "body2"} [:> Skeleton]])])
 
-(defn app-page []
-  [:> Box {:sx
-           {:bgcolor "grey.300"
-            :minHeight "100vh"}}
+(defn app-page [page]
+  [:> Box {:sx {:bgcolor "grey.300"
+                :minHeight "100vh"}}
    [:> Container {:maxWidth "lg"}
     [:> AppBar {:color "transparent"
                 :elevation 0
                 :position "static"}
-     [:> Toolbar [routing/main-nav]]]
+     [:> Toolbar
+      [:> Grid {:container true
+                :spacing {:xs 2}
+                :sx {:justifyContent "space-between"}}
+       [:> Grid {:item true :xs 1} [image]]
+       [:> Grid {:item true :xs 11 :sx {:alignSelf "center"}}
+        [routing/main-nav]]]]]]
+   [:> Box {:sx {:bgcolor "grey.200"}}
+    [:> Container {:maxWidth "lg"}
+     [:> Grid {:container true :spacing {:xs 2} :rowSpacing {:xs 0}}
+      [:> Grid {:item true :xs 3} [side]]
+      [:> Grid {:item true :xs 8}
+       [:> Typography {:variant "h1"} (:title page)]]]]]
+   [:> Container {:maxWidth "lg"}
     [:> Grid {:container true :spacing {:xs 2}}
-     [:> Grid {:item true :xs 1} [image]]
-     [:> Grid {:item true :xs 11} [header]]
-     [:> Grid {:item true :xs 1} [side]]
-     [:> Grid {:item true :xs 11} [main]]
+     [:> Grid {:item true :xs 3}]
+     [:> Grid {:item true :xs 8} [main]]
      [:> Grid {:item true :xs 12} [footer]]]]])
 
 (defn app []
-  [routing/page-router [app-page]])
+  [routing/page-router app-page])

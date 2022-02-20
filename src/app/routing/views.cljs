@@ -20,22 +20,22 @@
   [:f> fc-path-changed children])
 
 (defn page-router [component]
-  (let [routes @(rf/subscribe [::subs/pages])]
+  (let [pages @(rf/subscribe [::subs/pages])]
     [:> router/BrowserRouter
      [:> router/Routes
-      (for [route routes]
-        [:> router/Route {:key (:id route)
-                          :path (:path route)
-                          :element (r/as-element [path-changed component])}])]]))
+      (for [page pages]
+        [:> router/Route
+         {:key (:id page)
+          :path (:path page)
+          :element (r/as-element [path-changed [component page]])}])]]))
 
 (defn main-nav []
   (let [pages @(rf/subscribe [::subs/pages])]
-    [:<>
+    [:nav {:style {:float "right"}}
      (for [{:keys [id path title nav]} pages]
        [:> Button {:key id}
         [:> Link
          {:underline "none"
-          :color "white"
           :component router/Link
           :to path}
          (if (empty? nav) title nav)]])]))
