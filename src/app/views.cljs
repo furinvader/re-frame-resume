@@ -41,7 +41,7 @@
   [:<>
    [md-elements @(rf/subscribe [::subs/contents-by-position "side"])]
    (when @(rf/subscribe [::subs/loading?])
-     [:> Skeleton {:variant "rectangular" :height 100}])])
+     [:> Skeleton {:variant "rectangular" :height 300}])])
 
 (defn footer []
   [:<>
@@ -68,21 +68,22 @@
                       :justifyContent "flex-end"}}
         [routing/main-nav]]]]]]
    [:> Box {:sx {:bgcolor "grey.200"
-                 :my 2}}
+                 :mt 4}}
     [:> Container {:maxWidth "lg"}
-     [:> Grid {:container true :spacing {:xs 2} :rowSpacing {:xs 0}}
+     [:> Grid {:container true
+               :spacing {:xs 4}
+               :rowSpacing {:xs 0}}
       [:> Grid {:item true
                 :xs 3
                 :sx {:position "relative"}}
-       [:> Paper {:sx {:p 1
-                       :position "absolute"
-                       :mr 2
-                       :mt -2}}
-        [side]]]
-      [:> Grid {:item true :xs 8}
-       [:> Typography {:variant "h1"} (:title page)]]]]]
-   [:> Container {:maxWidth "lg"}
-    [:> Grid {:container true :spacing {:xs 2}}
+       [:> Box {:sx {:width "100%"
+                     :position "absolute"}}
+        [:> Paper {:sx {:p 1 :mr 4 :mt -3}}
+         [side]]]]
+      [:> Grid {:item true :xs 8 :sx {:py 1}}
+       [:> Typography {:variant "h2"} (:title page)]]]]]
+   [:> Container {:maxWidth "lg" :sx {:pt 2}}
+    [:> Grid {:container true :spacing {:xs 4}}
      [:> Grid {:item true :xs 3}]
      [:> Grid {:item true :xs 8}
       [main]]
