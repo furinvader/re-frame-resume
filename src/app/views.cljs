@@ -3,6 +3,7 @@
             ["@mui/material/Box" :default Box]
             ["@mui/material/Container" :default Container]
             ["@mui/material/Grid" :default Grid]
+            ["@mui/material/Paper" :default Paper]
             ["@mui/material/Skeleton" :default Skeleton]
             ["@mui/material/Toolbar" :default Toolbar]
             ["@mui/material/Typography" :default Typography]
@@ -66,17 +67,27 @@
                       :alignSelf "center"
                       :justifyContent "flex-end"}}
         [routing/main-nav]]]]]]
-   [:> Box {:sx {:bgcolor "grey.200"}}
+   [:> Box {:sx {:bgcolor "grey.200"
+                 :my 2}}
     [:> Container {:maxWidth "lg"}
      [:> Grid {:container true :spacing {:xs 2} :rowSpacing {:xs 0}}
-      [:> Grid {:item true :xs 3} [side]]
+      [:> Grid {:item true
+                :xs 3
+                :sx {:position "relative"}}
+       [:> Paper {:sx {:p 1
+                       :position "absolute"
+                       :mr 2
+                       :mt -2}}
+        [side]]]
       [:> Grid {:item true :xs 8}
        [:> Typography {:variant "h1"} (:title page)]]]]]
    [:> Container {:maxWidth "lg"}
     [:> Grid {:container true :spacing {:xs 2}}
      [:> Grid {:item true :xs 3}]
-     [:> Grid {:item true :xs 8} [main]]
-     [:> Grid {:item true :xs 12} [footer]]]]])
+     [:> Grid {:item true :xs 8}
+      [main]]
+     [:> Grid {:item true :xs 12}
+      [footer]]]]])
 
 (defn app []
   [routing/page-router app-page])
