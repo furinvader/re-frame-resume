@@ -60,9 +60,9 @@
       [:> Grid {:container true
                 :spacing {:xs 2}
                 :sx {:justifyContent "space-between"}}
-       [:> Grid {:item true :xs 1} [image]]
+       [:> Grid {:item true :xs 4} [image]]
        [:> Grid {:item true
-                 :xs 11
+                 :xs 8
                  :sx {:display "flex"
                       :alignSelf "center"
                       :justifyContent "flex-end"}}
@@ -74,17 +74,17 @@
                :spacing {:xs 4}
                :rowSpacing {:xs 0}}
       [:> Grid {:item true
-                :xs 3
+                :xs 4
                 :sx {:position "relative"}}
        [:> Box {:sx {:width "100%"
                      :position "absolute"}}
-        [:> Paper {:sx {:p 1 :mr 4 :mt -3}}
+        [:> Paper {:sx {:p 1 :mx 4 :mt -3}}
          [side]]]]
       [:> Grid {:item true :xs 8 :sx {:py 1}}
        [:> Typography {:variant "h2"} (:title page)]]]]]
    [:> Container {:maxWidth "lg" :sx {:pt 2}}
     [:> Grid {:container true :spacing {:xs 4}}
-     [:> Grid {:item true :xs 3}]
+     [:> Grid {:item true :xs 4}]
      [:> Grid {:item true :xs 8}
       [main]]
      [:> Grid {:item true :xs 12}
