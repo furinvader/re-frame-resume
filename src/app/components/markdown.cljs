@@ -18,10 +18,13 @@
 (defn h2 [props]
   [:> Typography (merge props {:variant "h2"})])
 
+(defn h3 [props]
+  [:> Typography (merge props {:variant "h3"})])
+
 (defn p [props]
   [:> Typography (merge props {:variant "body1"})])
 
-(def mui-defaults {:h1 h1 :h2 h2 :p p})
+(def mui-defaults {:h1 h1 :h2 h2 :h3 h3 :p p})
 
 (defn mui
   ([md]
