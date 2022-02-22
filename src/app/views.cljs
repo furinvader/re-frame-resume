@@ -5,12 +5,20 @@
             ["@mui/material/Grid" :default Grid]
             ["@mui/material/Paper" :default Paper]
             ["@mui/material/Skeleton" :default Skeleton]
+            ["@mui/material/styles" :refer (ThemeProvider createTheme)]
             ["@mui/material/Toolbar" :default Toolbar]
             ["@mui/material/Typography" :default Typography]
             [app.components.markdown :as md]
             [app.routing.views :as routing]
             [app.subs :as subs]
             [re-frame.core :as rf]))
+
+(defn app-theme []
+  (let [config {:typography {:h1 {:fontSize "3rem"}
+                             :h2 {:fontSize "2.75rem"}}}
+        theme (createTheme (clj->js config))]
+    (fn [children]
+      [:> ThemeProvider {:theme theme} children])))
 
 (defn image []
   [:div
@@ -85,8 +93,7 @@
          [side]]]]
       [:> Grid {:item true :xs 8 :sx {:py 1}}
        [:> Typography {:variant "h1"
-                       :sx {:py 1
-                            :fontSize "3rem"}}
+                       :sx {:py 1}}
         [page-subtitle page]]]]]]
    [:> Container {:maxWidth "lg" :sx {:pt 2}}
     [:> Grid {:container true :spacing {:xs 4}}
@@ -97,4 +104,5 @@
       [footer]]]]])
 
 (defn app []
-  [routing/page-router app-page])
+  [app-theme
+   [routing/page-router app-page]])
