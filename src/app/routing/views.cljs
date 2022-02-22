@@ -29,13 +29,16 @@
           :path (:path page)
           :element (r/as-element [path-changed [component page]])}])]]))
 
+(defn page-nav-title [{:keys [title nav]}]
+  (if (empty? nav) title nav))
+
 (defn main-nav []
   (let [pages @(rf/subscribe [::subs/pages])]
     [:nav
-     (for [{:keys [id path title nav]} pages]
-       [:> Button {:key id}
+     (for [page pages]
+       [:> Button {:key (:id page)}
         [:> Link
          {:underline "none"
           :component router/Link
-          :to path}
-         (if (empty? nav) title nav)]])]))
+          :to (:path page)}
+         [page-nav-title page]]])]))
