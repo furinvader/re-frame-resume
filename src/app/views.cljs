@@ -49,6 +49,9 @@
    (when @(rf/subscribe [::subs/loading?])
      [:> Typography {:variant "body2"} [:> Skeleton]])])
 
+(defn page-subtitle [{:keys [title subtitle]}]
+  (if (empty? subtitle) title subtitle))
+
 (defn app-page [page]
   [:> Box {:sx {:bgcolor "grey.300"
                 :minHeight "100vh"}}
@@ -81,7 +84,10 @@
         [:> Paper {:sx {:p 1 :mx 4 :mt -3}}
          [side]]]]
       [:> Grid {:item true :xs 8 :sx {:py 1}}
-       [:> Typography {:variant "h2"} (:title page)]]]]]
+       [:> Typography {:variant "h1"
+                       :sx {:py 1
+                            :fontSize "3rem"}}
+        [page-subtitle page]]]]]]
    [:> Container {:maxWidth "lg" :sx {:pt 2}}
     [:> Grid {:container true :spacing {:xs 4}}
      [:> Grid {:item true :xs 4}]
