@@ -89,7 +89,8 @@
                 :sx {:position "relative"}}
        [:> Box {:sx {:width "100%"
                      :position "absolute"}}
-        [:> Paper {:sx {:p 1 :mx 4 :mt -3}}
+        [:> Paper {:square true
+                   :sx {:p 1 :mx 4 :mt -3}}
          [side]]]]
       [:> Grid {:item true :xs 8 :sx {:py 1}}
        [:> Typography {:variant "h1"
