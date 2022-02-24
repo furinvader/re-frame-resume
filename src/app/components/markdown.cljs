@@ -20,27 +20,27 @@
    [:> ReactMarkdown {:components (reactify components)
                       :remarkPlugins #js[remark-gfm]} md]))
 
-(defn h1 [props]
-  [:> Typography (merge props {:variant "h1"})])
+(defn h1 [{:keys [children]}]
+  [:> Typography {:variant "h1"} children])
 
-(defn h2 [props]
-  [:> Typography (merge props {:variant "h2"})])
+(defn h2 [{:keys [children]}]
+  [:> Typography {:variant "h2"} children])
 
-(defn h3 [props]
-  [:> Typography (merge props {:variant "h3"})])
+(defn h3 [{:keys [children]}]
+  [:> Typography {:variant "h3"} children])
 
-(defn p [props]
-  [:> Typography (merge props {:variant "body1"})])
+(defn p [{:keys [children]}]
+  [:> Typography {:variant "body1"} children])
 
-(defn table [props]
+(defn table [{:keys [children]}]
   [:> TableContainer
-   [:> Table props]])
+   [:> Table children]])
 
-(defn thead [props]
-  [:> TableHead props])
+(defn thead [{:keys [children]}]
+  [:> TableHead children])
 
-(defn tbody [props]
-  [:> TableBody props])
+(defn tbody [{:keys [children]}]
+  [:> TableBody children])
 
 (defn tr [{:keys [children]}]
   [:> TableRow children])
