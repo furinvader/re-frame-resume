@@ -42,14 +42,14 @@
 (defn tbody [props]
   [:> TableBody props])
 
-(defn tr [props]
-  [:> TableRow props])
+(defn tr [{:keys [children]}]
+  [:> TableRow children])
 
-(defn th [props]
-  [:> TableCell props])
+(defn th [{:keys [children]}]
+  [:> TableCell children])
 
-(defn td [props]
-  [:> TableCell props])
+(defn td [{:keys [children]}]
+  [:> TableCell children])
 
 (def mui-defaults
   {:h1 h1 :h2 h2 :h3 h3
