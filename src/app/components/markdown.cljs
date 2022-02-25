@@ -1,5 +1,8 @@
 (ns app.components.markdown
-  (:require ["@mui/material/Table" :default Table]
+  (:require ["@mui/material/List" :default List]
+            ["@mui/material/ListItem" :default ListItem]
+            ["@mui/material/ListItemText" :default ListItemText]
+            ["@mui/material/Table" :default Table]
             ["@mui/material/TableBody" :default TableBody]
             ["@mui/material/TableCell" :default TableCell]
             ["@mui/material/TableContainer" :default TableContainer]
@@ -32,6 +35,16 @@
 (defn p [{:keys [children]}]
   [:> Typography {:variant "body1"} children])
 
+(defn ul [{:keys [children]}]
+  [:> List children])
+
+(defn ol [{:keys [children]}]
+  [:> List children])
+
+(defn li [{:keys [children]}]
+  [:> ListItem
+   [:> ListItemText children]])
+
 (defn table [{:keys [children]}]
   [:> TableContainer
    [:> Table children]])
@@ -53,8 +66,8 @@
 
 (def mui-defaults
   {:h1 h1 :h2 h2 :h3 h3
-   :table table :thead thead :tbody tbody :tr tr :th th :td td
-   :p p})
+   :p p :ul ul :ol ol :li li
+   :table table :thead thead :tbody tbody :tr tr :th th :td td})
 
 (defn mui
   ([md]
