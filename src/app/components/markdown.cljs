@@ -1,5 +1,6 @@
 (ns app.components.markdown
-  (:require ["@mui/material/List" :default List]
+  (:require ["@mui/material/Checkbox" :default Checkbox]
+            ["@mui/material/List" :default List]
             ["@mui/material/ListItem" :default ListItem]
             ["@mui/material/ListItemText" :default ListItemText]
             ["@mui/material/Table" :default Table]
@@ -64,10 +65,14 @@
 (defn td [{:keys [children]}]
   [:> TableCell children])
 
+(defn input [{:keys [checked disabled children]}]
+  [:> Checkbox {:checked checked :disabled disabled} children])
+
 (def mui-defaults
   {:h1 h1 :h2 h2 :h3 h3
    :p p :ul ul :ol ol :li li
-   :table table :thead thead :tbody tbody :tr tr :th th :td td})
+   :table table :thead thead :tbody tbody :tr tr :th th :td td
+   :input input})
 
 (defn mui
   ([md]
