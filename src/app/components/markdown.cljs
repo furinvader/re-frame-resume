@@ -1,5 +1,6 @@
 (ns app.components.markdown
   (:require ["@mui/material/Checkbox" :default Checkbox]
+            ["@mui/material/Link" :default Link]
             ["@mui/material/List" :default List]
             ["@mui/material/ListItem" :default ListItem]
             ["@mui/material/ListItemText" :default ListItemText]
@@ -36,6 +37,9 @@
 (defn p [{:keys [children]}]
   [:> Typography {:variant "body1"} children])
 
+(defn a [{:keys [title href children]}]
+  [:> Link {:title title :href href} children])
+
 (defn ul [{:keys [children]}]
   [:> List children])
 
@@ -70,7 +74,7 @@
 
 (def mui-defaults
   {:h1 h1 :h2 h2 :h3 h3
-   :p p :ul ul :ol ol :li li
+   :a a :p p :ul ul :ol ol :li li
    :table table :thead thead :tbody tbody :tr tr :th th :td td
    :input input})
 
