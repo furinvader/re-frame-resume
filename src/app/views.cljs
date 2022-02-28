@@ -21,11 +21,11 @@
       [:> ThemeProvider {:theme theme} children])))
 
 (defn image []
-  [:div
-   {:style {:width "100%"
-            :height "100%"
-            :min-height 100}
-    :class "bunnify"}])
+  [:> Box {:class "bunnify"
+           :sx {:width "100%"
+                :height "100%"
+                :min-height 100
+                :background-position-x "left"}}])
 
 (defn md-elements [elements]
   [:<>
