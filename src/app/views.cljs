@@ -25,7 +25,7 @@
            :sx {:width "100%"
                 :height "100%"
                 :min-height 100
-                :background-position-x "left"}}])
+                :background-position-x 8}}])
 
 (defn md-elements [elements]
   [:<>
